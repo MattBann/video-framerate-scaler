@@ -23,8 +23,8 @@ if __name__ == '__main__':
     # Get relevant metadata
     nFrames = int(vidFile.get(cv2.CAP_PROP_FRAME_COUNT))
     print(f'Number of frames in original video: {nFrames}')
-    fps = int(vidFile.get(cv2.CAP_PROP_FPS))
-    frame_time = int((1/fps) * 990) # Frame time in milliseconds
+    fps = vidFile.get(cv2.CAP_PROP_FPS)
+    frame_time = int((1/fps) * 1000) # Frame time in milliseconds
     print(f'Frame rate of orginal video: {fps}')
     dimensions = (int(vidFile.get(cv2.CAP_PROP_FRAME_HEIGHT)), int(vidFile.get(cv2.CAP_PROP_FRAME_WIDTH)))
     print(f'Dimensions of video: {dimensions}')
@@ -53,7 +53,7 @@ if __name__ == '__main__':
     out_frames.append(frames[len(frames)-1])
 
     # Create output file 
-    output = cv2.VideoWriter(args[2],cv2.VideoWriter_fourcc('M','J','P','G'), fps*2, (dimensions[1],dimensions[0]))
+    output = cv2.VideoWriter(args[2],cv2.VideoWriter_fourcc('M','P','E','G'), fps*2, (dimensions[1],dimensions[0]))
     for frame in out_frames:
         output.write(frame)
     output.release()

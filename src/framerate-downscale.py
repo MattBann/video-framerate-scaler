@@ -5,7 +5,7 @@ if __name__ == '__main__':
 
     # Get input and output arguments
     args = sys.argv
-    if len(args) != 2:
+    if len(args) != 3:
         print("Invalid arguments given. Usage: input-video-filepath output-video-filepath")
         sys.exit(1)
 
@@ -20,12 +20,12 @@ if __name__ == '__main__':
         sys.exit(1)
     
     # Get relevant metadata
-    fps = int(vidFile.get(cv2.CAP_PROP_FPS))
+    fps = vidFile.get(cv2.CAP_PROP_FPS)
     dimensions = (int(vidFile.get(cv2.CAP_PROP_FRAME_WIDTH)), int(vidFile.get(cv2.CAP_PROP_FRAME_HEIGHT)))
     nFrames = int(vidFile.get(cv2.CAP_PROP_FRAME_COUNT))
 
     # Create output file
-    output = cv2.VideoWriter(args[2],cv2.VideoWriter_fourcc('M','P','E','G'), fps//2, dimensions)
+    output = cv2.VideoWriter(args[2],cv2.VideoWriter_fourcc('M','P','E','G'), fps/2, dimensions)
     for i in range(nFrames//2):
         # Remove half the frames by read twice, write once
         ret, frame = vidFile.read()
